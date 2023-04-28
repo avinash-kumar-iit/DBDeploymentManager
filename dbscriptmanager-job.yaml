@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dbscriptmanager
+spec:
+  template:
+    spec:
+      containers:
+        - name: dbscriptmanager
+          image: 819563108174.dkr.ecr.us-east-2.amazonaws.com/hdfcb-ef-mum:dbdeploymentmanager-0.0.1
+      restartPolicy: Never
+  backoffLimit: 2

@@ -1,0 +1,4 @@
+FROM adoptopenjdk/openjdk11:jre-11.0.6_10-alpine
+
+COPY target/DBDeploymentManager-0.0.1.jar dbdeploymentmanager-0.0.1.jar
+ENTRYPOINT ["java","-jar","/dbdeploymentmanager-0.0.1.jar"]

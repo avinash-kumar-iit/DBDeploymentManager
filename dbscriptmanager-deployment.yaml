@@ -1,0 +1,57 @@
+# Copyright 2019 HDFC BANK
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbscriptmanager
+spec:
+  selector:
+    matchLabels:
+      app: dbscriptmanager
+  template:
+    metadata:
+      labels:
+        app: dbscriptmanager
+    spec:
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: dbscriptmanager
+        image: 819563108174.dkr.ecr.us-east-2.amazonaws.com/hdfcb-ef-mum:dbdeploymentmanager-0.0.1
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: lj-common-configmap        
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dbscriptmanager
+spec:
+  type: ClusterIP
+  selector:
+    app: dbscriptmanager
+  ports:
+  - name: http
+    port: 8082
+    targetPort: 8082
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dbscriptmanager
+spec:
+  maxReplicas: 10 # define max replica count
+  minReplicas: 1  # define min replica count
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: dbscriptmanager
+  targetCPUUtilizationPercentage: 50 # target CPU utilization
