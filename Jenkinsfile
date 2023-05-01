@@ -38,6 +38,19 @@ pipeline {
    
                
     }
+    stage ('Sonarqube') {
+            steps {
+                script {
+             scannerHome = tool 'SonarQubeScanner'
+                }
+               withSonarQubeEnv('SonarQube'){
+                bat "mvn sonar:sonar"
+               }
+         }
+        
+   
+               
+    }
             }
            
         }
