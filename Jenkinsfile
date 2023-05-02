@@ -44,6 +44,13 @@ pipeline {
             sonarscan()
     }
             }
+			
+   stage('Build Jar'){
+        steps {
+            bat 'mvn package'
+            stash includes: 'target/*.jar', name: 'targetfiles'
+        }
+    }
            
         }
 }        
