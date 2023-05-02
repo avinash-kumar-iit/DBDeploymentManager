@@ -13,7 +13,8 @@ pipeline {
       
 	  stage('git clone') {
             steps {
-                 git branch: 'main', url: 'https://github.com/avinash-kumar-iit/DBDeploymentManager.git'
+                // git branch: 'main', url: 'https://github.com/avinash-kumar-iit/DBDeploymentManager.git'
+				 runGitCheckOut(false)
             }
         }
        
