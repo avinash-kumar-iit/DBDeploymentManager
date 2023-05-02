@@ -41,21 +41,9 @@ pipeline {
     }
     stage ('Sonarqube') {
             steps {
-                script {
             sonarscan()
-         }
-        
-   
-               
     }
             }
            
         }
-
-		
-		
-		
-		
-		
-		
-		
+}        
