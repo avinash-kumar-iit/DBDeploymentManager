@@ -47,7 +47,7 @@ pipeline {
 			
    stage('Deployement'){
         steps {
-            scripts {
+            script {
 			
                 def config = [:]
 
@@ -59,4 +59,4 @@ pipeline {
     }
            
         }
-}        
+}
