@@ -45,10 +45,16 @@ pipeline {
     }
             }
 			
-   stage('Build Jar'){
+   stage('Deployement'){
         steps {
-            bat 'mvn package'
-            stash includes: 'target/*.jar', name: 'targetfiles'
+            scripts {
+			
+                def config = [:]
+
+                config = pipelineSetup()
+
+             runUploadToArtifactory.maven(config)
+			}
         }
     }
            
