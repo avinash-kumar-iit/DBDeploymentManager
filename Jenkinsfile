@@ -48,6 +48,12 @@ pipeline {
    stage('Deployement'){
         steps {
             script {
+			  
+			  bat "mvn -version"
+
+              bat "echo $JAVA_HOME"       
+
+                runGitCheckOut(false)
 			
                 def config = [:]
 
