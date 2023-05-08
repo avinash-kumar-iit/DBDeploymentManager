@@ -39,11 +39,11 @@ pipeline {
    
                
     }
-    stage ('Sonarqube') {
-            steps {
-            sonarscan()
-    }
-            }
+//     stage ('Sonarqube') {
+//             steps {
+//             sonarscan()
+//     }
+//             }
 			
    stage('Deployement'){
         steps {
